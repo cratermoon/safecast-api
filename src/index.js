@@ -6,7 +6,7 @@ module.exports = {
   getUser: function(id) {},
   
   getMeasurements: measurement.getMeasurements,
-  getMeasurement: function(id) {},
+  getMeasurement: measurement.getMeasurement,
 
   getBgeigie_imports: function() {},
 
