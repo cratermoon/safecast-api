@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/cratermoon/safecast-api/issues"
   },
-  "homepage": "https://github.com/cratermoon/safecast-api#readme"
+  "homepage": "https://github.com/cratermoon/safecast-api#readme",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "^3.0.2"
+  }
 }
