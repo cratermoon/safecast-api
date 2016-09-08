@@ -3,17 +3,15 @@ const querystring = require('querystring');
 
 var options = require('./options');
 
-exports.getMeasurements = getMeasurements;
-exports.getMeasurement = getMeasurement;
+exports.listUsers = listUsers;
+exports.getUser = getUser;
 
-function getMeasurements(latitude, longitude, distance, callback) {
+function listUsers(name, callback) {
   var str = '';
   var qs = querystring.stringify({
-    latitude: latitude,
-    longitude: longitude,
-    distance: distance
+    name: name
   });
-  options.path = `/measurements.json?${qs}`;
+  options.path = `/users.json?${qs}`;
   var req = https.get(options, (res) => {
     res.on('data', (d) => {
       str += d;
@@ -32,10 +30,9 @@ function getMeasurements(latitude, longitude, distance, callback) {
   });
 }
 
-
-function getMeasurement(id, callback) {
+function getUser(id, callback) {
   var str = '';
-  options.path = `/measurements/${id}.json`
+  options.path = `/users/${id}.json`;
   var req = https.get(options, (res) => {
     res.on('data', (d) => {
       str += d;
@@ -47,6 +44,7 @@ function getMeasurement(id, callback) {
   });
 
   req.end();
+
 
   req.on('error', (e) => {
     console.error(e);

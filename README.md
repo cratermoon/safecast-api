@@ -1,6 +1,6 @@
 # safecast-api
 
-> Safecast API is node.js client library for [safecast APIs](https://api.safecast.org).
+> Safecast API is a node.js client library for [safecast APIs](https://api.safecast.org).
 
 ## TODO ##
 
@@ -20,5 +20,5 @@ npm install safecast-api
 
 ----
 > &copy; Steven E. Newton &nbsp;&middot;&nbsp;
-> License: [ISC][license-url] &nbsp;&middot;&nbsp;
+> License: [ISC](https://opensource.org/licenses/ISC) &nbsp;&middot;&nbsp;
 > Github: [@cratermoon](https://github.com/cratermoon)
