@@ -56,7 +56,19 @@ describe('safecast', function() {
 
 // Device API
 
-// TODO listDevices
+describe("#listDevices", function() {
+  it('should return a list of devices given a manufacturer', function(done) {
+    sc.listDevices('Quarta', '', '', function(devices) {
+      devices.should.exist;
+      devices.length.should.be.above(0);
+      devices.forEach(function (element) {
+        element.manufacturer.should.match(/^Quarta/);
+      });
+      done();
+    });
+  });
+});
+
 describe("#getDevice(id)", function() {
   it('should return information about a device given an id', function(done) {
     sc.getDevice(4, function(device) {

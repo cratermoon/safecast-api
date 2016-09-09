@@ -19,5 +19,8 @@
   "devDependencies": {
     "chai": "*",
     "mocha": "^3.0.2"
+  },
+  "dependencies": {
+    "node-rest-client": "^2.0.1"
   }
 }

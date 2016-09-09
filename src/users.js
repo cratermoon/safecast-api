@@ -1,52 +1,30 @@
-const https = require('https');
-const querystring = require('querystring');
+var Client = require('node-rest-client').Client;
 
 var options = require('./options');
 
 exports.listUsers = listUsers;
 exports.getUser = getUser;
 
+var client = new Client();
+client.registerMethod("listUsers", options.url+"/users.json", "GET");
+client.registerMethod("getUser", options.url+"/users/${id}.json", "GET");
+
 function listUsers(name, callback) {
-  var str = '';
-  var qs = querystring.stringify({
-    name: name
-  });
-  options.path = `/users.json?${qs}`;
-  var req = https.get(options, (res) => {
-    res.on('data', (d) => {
-      str += d;
-    });
-    res.on('end', function () {
-      callback(JSON.parse(str));
-    });
-
-  });
-
-  req.end();
-
-
-  req.on('error', (e) => {
-    console.error(e);
+  var args = {
+    parameters: {
+      name: name,
+    }
+  }
+  client.methods.listUsers(args, function(data, response) {
+    callback(data);
   });
 }
 
 function getUser(id, callback) {
-  var str = '';
-  options.path = `/users/${id}.json`;
-  var req = https.get(options, (res) => {
-    res.on('data', (d) => {
-      str += d;
-    });
-    res.on('end', function () {
-      callback(JSON.parse(str));
-    });
-
-  });
-
-  req.end();
-
-
-  req.on('error', (e) => {
-    console.error(e);
+  var args = {
+    path: { "id" : id }
+  }
+  client.methods.getUser(args, function(data, response) {
+    callback(data);
   });
 }

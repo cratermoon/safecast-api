@@ -1,33 +1,33 @@
 // devices
-const https = require('https');
-const querystring = require('querystring');
+var Client = require('node-rest-client').Client;
 
 var options = require('./options');
 
 exports.listDevices = listDevices;
 exports.getDevice = getDevice;
 
+var client = new Client();
+client.registerMethod("listDevices", options.url+"/devices.json", "GET");
+client.registerMethod("getDevice", options.url+"/devices/${id}.json", "GET");
+
 function listDevices(manufacturer, model, sensor, callback) {
-  callback({});
+  var args = {
+    parameters: {
+      manufacturer : manufacturer,
+      model : model,
+      sensor: sensor
+    }
+  }
+  client.methods.listDevices(args, function(data, response) {
+    callback(data);
+  });
 }
 
 function getDevice(id, callback) {
-  var str = '';
-  options.path = `/devices/${id}.json`;
-  var req = https.get(options, (res) => {
-    res.on('data', (d) => {
-      str += d;
-    });
-    res.on('end', function () {
-      callback(JSON.parse(str));
-    });
-
-  });
-
-  req.end();
-
-
-  req.on('error', (e) => {
-    console.error(e);
+  var args = {
+    path: { "id" : id }
+  }
+  client.methods.getDevice(args, function(data, response) {
+    callback(data);
   });
 }
