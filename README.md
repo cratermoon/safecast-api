@@ -1,11 +1,6 @@
 # safecast-api
 
-> Safecast API is a node.js client library for [safecast APIs](https://api.safecast.org).
-
-## TODO ##
-
-* Add support for i18n/l10n endpoints
-
+> Safecast API is a node.js client library for [safecast REST APIs](https://api.safecast.org).
 
 ## Install
 
@@ -15,8 +10,35 @@ npm install safecast-api
 
 ## Usage
 
-## API
+```
+var safecast = require('safecast-api');
 
+safecast.getMeasurements(0,0,1,function(measurements) {
+  measurements.forEach(function (measurement) {
+    var reading = util.format("Reading %d: %d %s near %d %d on %s",
+                               measurement.id,
+                               measurement.value,
+                               measurement.unit,
+                               measurement.latitude,
+                               measurement.longitude,
+                               measurement.captured_at);
+    console.log(reading);
+  });
+});
+```
+
+## Tests
+
+`npm test`
+
+## Contributing
+
+Safecast users that have an account should test the POST functions.
+
+## TODO ##
+
+* Support POST features
+* Add support for i18n/l10n endpoints
 
 ----
 > &copy; Steven E. Newton &nbsp;&middot;&nbsp;
